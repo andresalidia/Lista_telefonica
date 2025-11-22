@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "menu.h"
-int main(){
-    int continuar = 1;
-    while (continuar)
-    {
-        int escolha;
+#include "Cadastrar.h"
+#include "Editar.h"
+#include "Excluir.h"
+#include "Consultar.h"
+
+void main(){
+    int escolha;
+    do{
+        
         printf("=====Lista Telefonica=======\n");
         printf("Menu\n");
         printf("1-Cadastra\n");
@@ -15,9 +19,30 @@ int main(){
         printf("4-Consultar\n");
         printf("5-Sair\n");
         scanf("%d" ,&escolha);
+        switch (escolha)
+        {
+        case 1:
+            Cadastrar();
+            break;
+         case 2:
+            /* code */
+            break;
+        case 3:
+            /* code */
+            break;
+        case 4:
+            /* code */
+            break;
+        case 5:
+            printf("Saindo...\n");
+            break;
+        default:
+            printf("Opcao invalida, digite um número entre 1 à 5.\n");
+            printf("Tente novamente.\n");
+            break;
+        }
         
-        continuar= menu_principal(escolha);
     
-    }  
-    return 0;
+    } while (escolha != 5);
+
 }

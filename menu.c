@@ -20,7 +20,7 @@ void Cadastrar(){
              Cadastrar_pessoa();
              break;
          case 2:
-            
+            Cadastrar_telefone();
                break;
          case 3:
                printf("Retornando ao menu principal...\n");

@@ -5,7 +5,7 @@
 #include "Validacao.h"
 
 int Ultimo_ID() {
-    FILE *arquivo = fopen("ListaTelefonica.csv", "r");
+    FILE *arquivo = fopen("Pessoas.csv", "r");
     int ultimo_id = 0;
 
     if (arquivo != NULL) {
@@ -37,7 +37,7 @@ int validar_Nome(const char* nome) {
         return 0; // Nome inválido
     }
    // Verificar se já existe nome no arquivo
-    FILE *arquivo = fopen("ListaTelefonica.csv", "r");
+    FILE *arquivo = fopen("Pessoas.csv", "r");
     if (arquivo != NULL) {
 
         char linha[200];
@@ -192,4 +192,48 @@ int validar_Email(const char* email) {
     return 1; // Email válido
 }   
 
+int validar_Telefone(const char* telefone) {
 
+    int tam=strlen(telefone);
+    // Verifica se o telefone tem exatamente 11 ou 10 dígitos
+    if (tam != 11 && tam != 10) {
+        printf("Telefone inválido, deve conter exatamente 10 ou 11 números.\n");
+        return 0; // Telefone inválido
+    }
+
+    // Verifica se todos os caracteres são dígitos
+    for (int i = 0; i < tam; i++) {
+        if (!isdigit(telefone[i])) {
+            printf("Telefone inválido, deve conter apenas números.\n");
+            return 0; // Telefone inválido
+        }
+    }
+
+    return 1; // Telefone válido
+}
+
+int Procurar_Nome(const char* nome){
+
+    FILE *arquivo = fopen("Pessoas.csv", "r");
+    if (arquivo != NULL) {
+
+        char linha[200];
+        while (fgets(linha, sizeof(linha), arquivo)) {
+            int id_lido;
+            char nome_existente[31];
+
+            // Lê ID (int) e Nome (string até o próximo ;)
+            if (sscanf(linha, "%d;%30[^;]", &id_lido, nome_existente) == 2) {
+
+                // Comparação exata
+                if (strcmp(nome, nome_existente) == 0) {
+                    return id_lido;   
+                }
+                     
+            }
+           id_lido++;    
+        }
+        return 0;
+        fclose(arquivo);
+    }
+}

@@ -84,10 +84,8 @@ void Cadastrar_pessoa(){
 
 void Cadastrar_telefone(){
     struct Contato novo_telefone;
-    char nome[31];
-    char continua[1] = "s";
-    char continuar_mesmoNome[1] = "s";
-    bool nome_encontrado = false; 
+   
+
 
     printf("Cadastro de Telefone por:\n");
     printf("1-Nome\n");
@@ -95,9 +93,12 @@ void Cadastrar_telefone(){
     printf("3-Retornar: ");
     int escolha;
     scanf("%d", &escolha);
-    switch (escolha)
-    {
-    case 1:
+    switch (escolha){
+    case 1:{
+    char nome[31];
+    char continua[1] = "s";
+    char continuar_mesmoNome[1] = "s";
+    bool nome_encontrado = false; 
        do{ 
             printf("Digite o nome: ");
             scanf("%s",nome);
@@ -134,9 +135,60 @@ void Cadastrar_telefone(){
         
 
         break;
-    case 2:
-        /* code */
-        break;
+    }
+   case 2: {
+    char continuar[2];
+    char continuar_mesmoNome[2] = "s";
+    bool id_encontrado = false;
+    do {
+        continuar[0] = 's';
+        int id_busca;
+        printf("Digite o ID: ");
+        scanf("%d", &id_busca);
+        
+        char *nome_encontrado = Procurar_ID(id_busca);
+        
+        if (nome_encontrado != NULL) {
+            printf("ID encontrado! Prosseguindo com o cadastro do telefone...\n");
+            FILE *arquivo_telefone = fopen("Telefones.csv", "a");
+            
+            if (arquivo_telefone == NULL) {
+                printf("Arquivo de telefones não pôde ser aberto.\n");
+                free(nome_encontrado);
+                break;
+            }
+            
+            do {
+                char *telefone_cadastrado = Telefone();
+                char novo_telefone[31];
+                strcpy(novo_telefone, telefone_cadastrado);
+                
+                fprintf(arquivo_telefone, "%d;%s;%s\n", id_busca, nome_encontrado, novo_telefone);
+                printf("Telefone cadastrado com sucesso!\n");
+                
+                printf("Deseja cadastrar outro telefone para o ID %d que pertence a %s? (s/n): ",id_busca, nome_encontrado);
+                scanf("%1s", continuar_mesmoNome);
+                
+                free(telefone_cadastrado); // Liberar memória alocada por Telefone()
+                
+            } while (continuar_mesmoNome[0] == 's' || continuar_mesmoNome[0] == 'S');
+            id_encontrado = true;
+            fclose(arquivo_telefone);
+            free(nome_encontrado);
+            
+        } else {
+            printf("ID não encontrado na lista. Deseja tentar novamente? (s/n): ");
+            scanf("%1s", continuar);
+        }
+        if (id_encontrado) {
+            printf("Deseja cadastrar telefone para outro ID? (s/n): ");
+            scanf("%1s", continuar);
+        }
+
+        
+    } while (continuar[0] == 's' || continuar[0] == 'S');
+    break;
+    }
     case 3:
         printf("Retornando ao menu anterior...\n");
         break;  

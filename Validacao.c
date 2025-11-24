@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "Validacao.h"
 
 int Ultimo_ID() {
@@ -236,4 +237,34 @@ int Procurar_Nome(const char* nome){
         return 0;
         fclose(arquivo);
     }
+}
+
+char* Procurar_ID(int id) {
+    FILE *arquivo = fopen("Pessoas.csv", "r");
+    char *nome_alocado = NULL; 
+
+    if (arquivo != NULL) {
+        char linha[200];
+        
+        while (fgets(linha, sizeof(linha), arquivo)) {
+            int id_lido;
+            char nome_existente[31]; 
+
+            
+            if (sscanf(linha, "%d;%30[^;]", &id_lido, nome_existente) >= 2) { 
+                
+                if (id == id_lido) {
+                
+                    nome_alocado = (char *)malloc(31 * sizeof(char));
+                    strcpy(nome_alocado, nome_existente);
+                    fclose(arquivo);
+                    return nome_alocado; 
+                }
+            }
+           id_lido++; 
+        }
+        fclose(arquivo); 
+    }
+    
+    return NULL;
 }

@@ -25,7 +25,7 @@ void main(){
             Cadastrar();
             break;
          case 2:
-            /* code */
+            Editar();
             break;
         case 3:
             /* code */

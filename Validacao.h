@@ -9,4 +9,5 @@ int validar_Email(const char* email);
 int validar_Telefone(const char* telefone);
 int Procurar_Nome(const char* nome);
 char* Procurar_ID(int id);
+
 #endif

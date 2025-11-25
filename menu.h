@@ -2,6 +2,6 @@
 #define MENU_H
 
 void Cadastrar();
-
+void Editar();
 
 #endif

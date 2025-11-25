@@ -216,9 +216,85 @@ void Editar_pessoa(){
     }
 }
 
-void Editar_telefone(){
-    //função para editar telefone
+
+void Editar_telefone() {
+    char continuar[2] = "s";
+    char nome[31];
+    int ID;
+    int validade_ID; 
+    char *validade_nome; // Mudar para ponteiro
+
+    printf("Editar Telefone por:\n");
+    printf("1-Nome\n");
+    printf("2-ID\n");
+    printf("3-Retornar: ");
+    int escolha;
+    scanf("%d", &escolha);
+    
+    switch (escolha) {
+        case 1: {
+            do {
+                printf("Nome: ");
+                scanf("%30s", nome); // Corrigido: removido &
+                validade_ID = Procurar_Nome(nome);
+                
+                if (validade_ID == 0) {
+                    printf("Nome não encontrado. Deseja tentar outro? (s/n): ");
+                    scanf("%1s", continuar);
+                }
+            } while (validade_ID == 0 && (continuar[0] == 's' || continuar[0] == 'S'));
+            
+            if (validade_ID != 0) {
+                do {
+                    // CORREÇÃO: Chamar função específica para editar telefone, não recursão
+                    atualizar_telefone(validade_ID); // Você precisa criar esta função
+                    
+                    printf("Deseja editar mais um numero de %s? (s/n): ", nome);
+                    scanf("%1s", continuar);
+                    
+                } while (continuar[0] == 's' || continuar[0] == 'S'); // Corrigido: aspas simples
+            }
+            break;
+        } 
+        
+        case 2: {
+            do {
+                printf("ID: ");
+                scanf("%d", &ID); // Corrigido: %d para inteiro
+                validade_nome = Procurar_ID(ID);
+                
+                if (validade_nome == NULL) {
+                    printf("ID não encontrado. Deseja tentar outro? (s/n): ");
+                    scanf("%1s", continuar);
+                }
+            } while (validade_nome == NULL && (continuar[0] == 's' || continuar[0] == 'S'));
+            
+            if (validade_nome != NULL) {
+                do {
+                    // CORREÇÃO: Chamar função específica para editar telefone, não recursão
+                    atualizar_telefone(ID); // Você precisa criar esta função
+                    
+                    printf("Deseja editar mais um numero de %s? (s/n): ", validade_nome);
+                    scanf("%1s", continuar);
+                    
+                } while (continuar[0] == 's' || continuar[0] == 'S'); // Corrigido: aspas simples
+                
+                // LIBERAR memória alocada por Procurar_ID
+                free(validade_nome);
+            }
+            break;
+        }
+        
+        case 3:
+            printf("Retornando ao menu anterior...\n");
+            break;
+            
+        default:
+            printf("Opção inválida!\n");
+            break;
+    }
 }
+
 void atualizar_telefone_Nome(char novo_nome[31], int id_encontrado) {
     struct Contato contato;
     int id_lido;
@@ -532,5 +608,122 @@ void atualizar_Pessoas_Email(char novo_email[31], int id_encontrado) {
         perror("Detalhe do remove");
         // Remove o temporário se não conseguiu substituir
         remove("Pessoas_temp.csv");
+    }
+}
+
+void atualizar_telefone(int id) {
+    char linha[200];
+    int id_lido;
+    char nome[31];
+    char telefone_Existente[12];
+    int i = 1;
+    int j = 0;
+    char novo_telefone[12];
+    int validar;
+
+    // Fecha qualquer instância que possa estar aberta
+    fflush(stdin);
+    
+    FILE *arquivoTelefone = fopen("Telefones.csv", "r");
+    if (!arquivoTelefone) {
+        printf("Erro ao abrir Telefones.csv para leitura\n");
+        return;
+    }
+
+    printf("Qual desses telefones deseja editar:\n");
+
+    // Primeira leitura: mostrar os telefones
+    while(fgets(linha, sizeof(linha), arquivoTelefone)) {
+        if (sscanf(linha, "%d;%30[^;];%11[^\n]", &id_lido, nome, telefone_Existente) == 3) {
+            if (id_lido == id) {
+                printf("%d - %s\n", i, telefone_Existente);
+                i++;
+            }
+        }
+    }
+
+    // Se não encontrou telefones
+    if (i == 1) {
+        printf("Nenhum telefone encontrado para este ID.\n");
+        fclose(arquivoTelefone);
+        return;
+    }
+
+    int opcao;
+    printf("Escolha o telefone para editar (1-%d): ", i-1);
+    scanf("%d", &opcao);
+
+    // Validar opção
+    if (opcao < 1 || opcao >= i) {
+        printf("Opção inválida!\n");
+        fclose(arquivoTelefone);
+        return;
+    }
+
+    // Solicitar novo telefone
+    do {
+        printf("Digite um novo número: ");
+        scanf("%11s", novo_telefone); // CORREÇÃO: removido &
+        validar = validar_Telefone(novo_telefone);
+        if (validar != 1) {
+            printf("Telefone inválido! Tente novamente.\n");
+        }
+    } while (validar != 1);
+
+    //Voltar ao início do arquivo para a segunda leitura
+    rewind(arquivoTelefone);
+
+    // Abrir arquivo temporário para escrita
+    FILE *arquivo_temp = fopen("Telefones_temp.csv", "w");
+    if (!arquivo_temp) {
+        printf("Erro ao criar arquivo temporário\n");
+        fclose(arquivoTelefone);
+        return;
+    }
+
+    // Segunda leitura: processar e atualizar
+    j = 0;
+    while(fgets(linha, sizeof(linha), arquivoTelefone)) {
+        if (sscanf(linha, "%d;%30[^;];%11[^\n]", &id_lido, nome, telefone_Existente) == 3) {
+            if (id_lido == id) {
+                j++;
+                if (j == opcao) {
+                    // Atualiza o telefone escolhido
+                    strcpy(telefone_Existente, novo_telefone);
+
+                }
+            }
+
+            fprintf(arquivo_temp, "%d;%s;%s\n", id_lido, nome, telefone_Existente);
+        } else {
+            // Escreve linhas que não seguem o formato esperado (para backup)
+            fprintf(arquivo_temp, "%s", linha);
+        }
+    }
+
+    fclose(arquivoTelefone);
+    fclose(arquivo_temp);
+
+    // Dá tempo para o sistema liberar os arquivos
+    Sleep(100);
+
+    
+    if (remove("Telefones.csv") == 0) {
+        
+        
+        // Depois renomeia o temporário
+        if (rename("Telefones_temp.csv", "Telefones.csv") == 0) {
+            printf("Telefone atualizado com sucesso!\n");
+        } else {
+            printf("ERRO: Não foi possível renomear Telefones_temp.csv\n");
+            perror("Detalhe do rename");
+            // Tenta restaurar o backup se o rename falhar
+            rename("Telefones.csv", "Telefones_backup.csv");
+        }
+    } else {
+        printf("ERRO: Não foi possível remover Telefones.csv\n");
+        perror("Detalhe do remove");
+        // Remove o temporário se não conseguiu substituir
+        remove("Telefones_temp.csv");
     }
 }

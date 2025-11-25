@@ -213,58 +213,51 @@ int validar_Telefone(const char* telefone) {
     return 1; // Telefone válido
 }
 
-int Procurar_Nome(const char* nome){
-
+int Procurar_Nome(char nome[31]) {
     FILE *arquivo = fopen("Pessoas.csv", "r");
-    if (arquivo != NULL) {
-
-        char linha[200];
-        while (fgets(linha, sizeof(linha), arquivo)) {
-            int id_lido;
-            char nome_existente[31];
-
-            // Lê ID (int) e Nome (string até o próximo ;)
-            if (sscanf(linha, "%d;%30[^;]", &id_lido, nome_existente) == 2) {
-
-                // Comparação exata
-                if (strcmp(nome, nome_existente) == 0) {
-                    return id_lido;   
-                }
-                     
-            }
-           id_lido++;    
-        }
-        return 0;
-        fclose(arquivo);
-    }
-}
-
-char* Procurar_ID(int id) {
-    FILE *arquivo = fopen("Pessoas.csv", "r");
-    char *nome_alocado = NULL; 
+    int id_encontrado = 0;
 
     if (arquivo != NULL) {
         char linha[200];
         
         while (fgets(linha, sizeof(linha), arquivo)) {
             int id_lido;
-            char nome_existente[31]; 
-
+            char nome_existente[31];
             
-            if (sscanf(linha, "%d;%30[^;]", &id_lido, nome_existente) >= 2) { 
-                
-                if (id == id_lido) {
-                
-                    nome_alocado = (char *)malloc(31 * sizeof(char));
-                    strcpy(nome_alocado, nome_existente);
-                    fclose(arquivo);
-                    return nome_alocado; 
+            if (sscanf(linha, "%d;%30[^;]", &id_lido, nome_existente) == 2) {
+                if (strcmp(nome, nome_existente) == 0) {
+                    id_encontrado = id_lido;
+                    fclose(arquivo);  // Fecha quando encontra
+                    return id_encontrado;
                 }
             }
-           id_lido++; 
         }
-        fclose(arquivo); 
+        fclose(arquivo);  // Fecha se não encontrou
     }
-    
+    return 0;
+}
+
+char* Procurar_ID(int id) {
+    FILE *arquivo = fopen("Pessoas.csv", "r");
+    char *nome_alocado = NULL;
+
+    if (arquivo != NULL) {
+        char linha[200];
+
+        while (fgets(linha, sizeof(linha), arquivo)) {
+            int id_lido;
+            char nome_existente[31];
+
+            if (sscanf(linha, "%d;%30[^;]", &id_lido, nome_existente) == 2) {
+                if (id == id_lido) {
+                    nome_alocado = (char *)malloc(31 * sizeof(char));
+                    strcpy(nome_alocado, nome_existente);
+                    fclose(arquivo);  // Fecha aqui quando encontra
+                    return nome_alocado;
+                }
+            }
+        }
+        fclose(arquivo);  // Fecha aqui se não encontrou
+    }
     return NULL;
 }

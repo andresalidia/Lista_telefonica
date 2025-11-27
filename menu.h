@@ -4,5 +4,6 @@
 void Cadastrar();
 void Editar();
 void Excluir();
+void Consultar();
 
 #endif

@@ -104,9 +104,9 @@ void Excluir_telefone(){
 
                 if (retornoID == 0) {
                     printf("Nome não encontrado!\n");
-                    printf("Telefone Excluido com Sucesso!");
                 } else {
                     atualizar_telefone_Excluir(retornoID);
+                    printf("Telefone Excluido com Sucesso!");
                 }
                 break;
             }

@@ -65,7 +65,7 @@ void Editar(){
 void Excluir(){
     do{
         printf("=====Lista Telefonica=======\n");
-        printf("Editar\n");
+        printf("Excluir\n");
          printf("1-Pessoa\n");
          printf("2-Telefone\n");
          printf("3-Retornar\n");
@@ -91,6 +91,31 @@ void Excluir(){
 }
 
 void Consultar(){
+       do{
+        printf("=====Lista Telefonica=======\n");
+        printf("Consultar\n");
+         printf("1-Pessoa\n");
+         printf("2-Telefone\n");
+         printf("3-Retornar\n");
+         scanf("%d" ,&escolha);
+         switch (escolha)
+         {
+         case 1:
+             Consultar_pessoa();
+             break;
+         case 2:
+            Consultar_telefone();
+               break;
+         case 3:
+               printf("Retornando ao menu principal...\n");
+               break;
+         default:
+               printf("Opcao invalida, digite um número entre 1 à 3.\n");
+               printf("Tente novamente.\n");
+               break;
+
+       }
+   }while(escolha!=3);
 
 }
 

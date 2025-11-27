@@ -31,7 +31,7 @@ void main(){
             Excluir();
             break;
         case 4:
-            /* code */
+            Consultar();
             break;
         case 5:
             printf("Saindo...\n");

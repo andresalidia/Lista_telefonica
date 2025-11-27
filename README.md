@@ -9,4 +9,11 @@ Este projeto foi desenvolvido em C como parte da disciplina de Algoritmos e cons
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🗂️ Estrutura de Dados (MER)
+
+A estrutura do projeto é baseada em duas tabelas principais — **Pessoas** e **Telefones** — com relacionamento de **um para muitos**, onde uma pessoa pode ter vários telefones, mas cada telefone pertence a apenas uma pessoa.
+
+### 📊 Diagrama MER
+
+![Diagrama MER](diagrama-mer.png)
+

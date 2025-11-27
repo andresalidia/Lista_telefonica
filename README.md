@@ -5,7 +5,7 @@ Este projeto foi desenvolvido em C como parte da disciplina de Algoritmos e cons
 
 ## 🚀 Tecnologias Utilizadas
 
-<img src="https://img.icons8.com/?size=100&id=40670&format=png&color=000000" width="40" style="vertical-align:middle; margin-right:10px;" /> Linguagem C
+<img src="https://img.icons8.com/?size=100&id=40670&format=png&color=000000" width="40" style="vertical-align:middle; margin-right:10px;" />
 
 
 ---

@@ -50,12 +50,12 @@ Qualquer entrada inválida deve ser solicitada novamente.
 ## 🌳 Estrutura em Árvore dos Menus
 
 📌 Menu Principal\n
-│\n
-├── 1. Cadastrar\n
-│ │\n
+│
+├── 1. Cadastrar
+│ │
 │ ├── 1. Pessoa\n
 │ │ └── 1.1 Cadastrar Pessoa\n
-│ │ ├── Digita Nome\n
+│ │ ├── Digita Nome
 │ │ ├── Digita Data de Nascimento\n
 │ │ ├── Digita CPF
 │ │ ├── Digita E-mail

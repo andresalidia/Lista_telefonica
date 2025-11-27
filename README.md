@@ -48,7 +48,7 @@ Qualquer entrada inválida deve ser solicitada novamente.
 ---
 
 ## 🌳 Estrutura em Árvore dos Menus
-
+'''
 📌 Menu Principal\n
 │
 ├── 1. Cadastrar
@@ -86,4 +86,4 @@ Qualquer entrada inválida deve ser solicitada novamente.
 │ └── 3. Retornar ao Menu Principal
 │
 └── 5. Sair
-
+'''

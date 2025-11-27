@@ -17,3 +17,10 @@ A estrutura do projeto é baseada em duas tabelas principais — **Pessoas** e *
 
 ![Diagrama MER](diagrama-mer.png)
 
+Campo,Descrição,Tamanho Máximo para Armazenamento
+Nome,Nome completo da pessoa.,Texto de 30 caracteres.
+Telefone,Número de telefone (incluindo DDD).,Texto de 11 caracteres.
+E-mail,Endereço de e-mail.,Texto de 30 caracteres.
+CPF,Cadastro de Pessoa Física.,Texto de 11 caracteres.
+Data de Nascimento,Data de nascimento da pessoa.,Texto de 10 caracteres.
+

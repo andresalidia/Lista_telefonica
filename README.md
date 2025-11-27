@@ -49,7 +49,7 @@ Qualquer entrada inválida deve ser solicitada novamente.
 
 ## 🌳 Estrutura em Árvore dos Menus
 ```
-📌 Menu Principal\n
+📌 Menu Principal
 │
 ├── 1. Cadastrar
 │ │

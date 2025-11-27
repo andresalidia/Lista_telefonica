@@ -28,7 +28,7 @@ void main(){
             Editar();
             break;
         case 3:
-            /* code */
+            Excluir();
             break;
         case 4:
             /* code */

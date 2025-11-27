@@ -3,5 +3,6 @@
 
 void Cadastrar();
 void Editar();
+void Excluir();
 
 #endif

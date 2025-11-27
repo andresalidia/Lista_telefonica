@@ -27,3 +27,15 @@ A estrutura do projeto é baseada em duas tabelas principais — **Pessoas** e *
 | **CPF**             | Cadastro de Pessoa Física.                 | Texto de **11 caracteres**    |
 | **Data de Nascimento** | Data de nascimento da pessoa.          | Texto de **10 caracteres**    |
 
+
+## ✅ Regras de Validação
+
+| **Campo**              | **Regra de Validação**                                                                 |
+|------------------------|-------------------------------------------------------------------------------------------|
+| **Nome**               | Deve ter mais de 2 caracteres e não pode existir na lista no momento do cadastro.        |
+| **Telefone**           | Deve possuir **10 ou 11 dígitos numéricos** (DDD incluso).                                |
+| **E-mail**             | Deve ter mais de 10 caracteres e ser um **e-mail válido**.                                |
+| **CPF**                | Deve ser um **CPF válido**.                                                               |
+| **Data de Nascimento** | Deve ser uma data válida no formato **dd/mm/YYYY** e ser **menor ou igual à data atual**. |
+
+

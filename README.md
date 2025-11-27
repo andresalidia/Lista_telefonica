@@ -39,3 +39,51 @@ A estrutura do projeto é baseada em duas tabelas principais — **Pessoas** e *
 | **Data de Nascimento** | Deve ser uma data válida no formato **dd/mm/YYYY** e ser **menor ou igual à data atual**. |
 
 
+## ⚙️ Organização do Programa e Menus
+
+A navegação do sistema é feita por menus, sempre aceitando valores inteiros (`int`).  
+O programa **encerra ao digitar 5** no Menu Principal.  
+Qualquer entrada inválida deve ser solicitada novamente.
+
+---
+
+## 🌳 Estrutura em Árvore dos Menus
+
+📌 Menu Principal
+│
+├── 1. Cadastrar
+│ │
+│ ├── 1. Pessoa
+│ │ └── 1.1 Cadastrar Pessoa
+│ │ ├── Digita Nome
+│ │ ├── Digita Data de Nascimento
+│ │ ├── Digita CPF
+│ │ ├── Digita E-mail
+│ │ └── Digita Telefone(s)
+│ │
+│ ├── 2. Telefone
+│ │ ├── 1.2.1 Cadastrar Telefone (Pesquisa por Nome)
+│ │ └── 1.2.2 Cadastrar Telefone (Pesquisa por ID)
+│ │
+│ └── 3. Retornar ao Menu Principal
+│
+├── 2. Editar
+│ │
+│ ├── 1. Pessoa
+│ ├── 2. Telefone
+│ └── 3. Retornar ao Menu Principal
+│
+├── 3. Excluir
+│ │
+│ ├── 1. Pessoa
+│ ├── 2. Telefone
+│ └── 3. Retornar ao Menu Principal
+│
+├── 4. Consultar
+│ │
+│ ├── 1. Pessoa
+│ ├── 2. Telefone
+│ └── 3. Retornar ao Menu Principal
+│
+└── 5. Sair
+

@@ -5,7 +5,7 @@ Este projeto foi desenvolvido em C como parte da disciplina de Algoritmos e cons
 
 ## 🚀 Tecnologias Utilizadas
 
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" width="40" style="vertical-align:middle; margin-right:10px;" /> Linguagem C
+<img src="[https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg](https://img.icons8.com/color/600/c-programming.png)" width="40" style="vertical-align:middle; margin-right:10px;" /> Linguagem C
 
 
 ---
